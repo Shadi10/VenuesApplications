@@ -3,4 +3,13 @@
     <string name="name">Name</string>
     <string name="location">location</string>
     <string name="address">address</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="venue_map">Venue Map</string>
+    <string name="venue_list">Venue List</string>
+    <string name="map_fragment">Map Fragment</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="example_1t2130">example: 1T2130</string>
+    <string name="open_at">Open at:</string>
+    <string name="search">Search</string>
 </resources>

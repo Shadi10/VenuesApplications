@@ -4,17 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class MyAdapter(private val venuesList: List<Result>) :
+class MyAdapter(private val venuesList: List<Result>,private val recyclerViewInterface: RecyclerViewInterface) :
     RecyclerView.Adapter<VenuesViewHolder>() {
 
-
-
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int):VenuesViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): VenuesViewHolder {
 
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.data, viewGroup, false)
-
-        return VenuesViewHolder(view)
+            .inflate(R.layout.fragment_layout, viewGroup, false)
+        return VenuesViewHolder(view,recyclerViewInterface)
     }
 
 
