@@ -2,29 +2,34 @@ package com.example.findvenues
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.findvenues.databinding.ActivityMainBinding
+import com.google.android.gms.maps.OnMapReadyCallback
+
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
-    private val viewModel by viewModels<VenuesViewModel>()
-
-
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.getData()
-        viewModel.venuesLiveData.observe(this, { venuesList ->
-            setUpRecyclerView(venuesList)
-        })
-    }
+        val listFragment = ListFragment()
+        val mapFragment = MapFragment()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment, listFragment).commit()
+        }
+        binding.btnList.setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flFragment, listFragment).commit()
+            }
 
-    fun setUpRecyclerView(venuesList: List<Result>){
-        binding.recyclerview.layoutManager = LinearLayoutManager(this)
-        binding.recyclerview.adapter  = MyAdapter(venuesList)
-    }
+        }
+        binding.btnMap.setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flFragment, mapFragment).commit()
+            }
 
+        }
+
+    }
 }
