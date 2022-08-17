@@ -13,13 +13,4 @@ interface ApiInterface {
 }
 
 
-//    @GET("v3/places/search")
-//    fun getOpenAt(
-//        @Query("ll") latitudeLongitude: String,
-//        @Query("radius") radius: Int,
-//        @Query("open_at") open_at: String,
-//        @Query("limit") limit: Int
-//    ): Call<VenueResponse>
-
-
 

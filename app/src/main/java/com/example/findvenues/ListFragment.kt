@@ -1,16 +1,11 @@
 package com.example.findvenues
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.*
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,28 +13,22 @@ import com.example.findvenues.data.Venue
 import com.example.findvenues.data.VenuesViewModel
 import com.example.findvenues.databinding.FragmentListBinding
 
-
 class ListFragment : Fragment(), RecyclerViewInterface {
     private lateinit var binding: FragmentListBinding
-    private val viewModel by viewModels<VenuesViewModel>()
-    private lateinit var mVenueViewModel: VenuesViewModel
-//    private var itemPos: Int = 0
-//    var isClicked = false
+    private val viewModel by activityViewModels<VenuesViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListBinding.inflate(inflater, container, false)
+
         binding.userInputBtn.setOnClickListener {
             val userInput = binding.inputOpenAt.text.toString()
+
             viewModel.getData(userInput)
-            viewModel.venuesLiveData.observe(viewLifecycleOwner, { venueList ->
-                setUpRecyclerView(venueList)
-            })
         }
-        val userInput = binding.inputOpenAt.text.toString()
-        viewModel.getData(userInput)
+        viewModel.getData()
         viewModel.venuesLiveData.observe(viewLifecycleOwner, { venueList ->
             setUpRecyclerView(venueList)
         })
@@ -57,7 +46,6 @@ class ListFragment : Fragment(), RecyclerViewInterface {
         }
         val itemTouchHelper = ItemTouchHelper(swipeLeftOrRight)
         itemTouchHelper.attachToRecyclerView(binding.recyclerview)
-        mVenueViewModel = ViewModelProvider(this)[VenuesViewModel::class.java]
 
         return binding.root
     }
@@ -72,27 +60,19 @@ class ListFragment : Fragment(), RecyclerViewInterface {
         val country = viewHolder.countryTextView.text.toString()
         val address = viewHolder.addressTextView.text.toString()
         val venue = Venue(0, name, country, address)
-        mVenueViewModel.addVenue(venue)
+        viewModel.addVenue(venue)
 
     }
 
+    override fun onItemClick(venue: Result) {
 
-    override fun onItemClick(position: Int) {   // switch to the map when clicking on an item
-//        isClicked = true
-//        itemPos = position
-//        getPosition()
-        Toast.makeText(view?.context, "Item $position is clicked", Toast.LENGTH_SHORT).show()
+        viewModel.clickedVenue = venue
         val mapFragment = MapFragment()
         val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.flFragment, mapFragment).commit()
         fragmentTransaction.addToBackStack(null)
+
     }
-
-//    fun getPosition(): Int {
-//        return itemPos
-//    }
-
-
 }
 

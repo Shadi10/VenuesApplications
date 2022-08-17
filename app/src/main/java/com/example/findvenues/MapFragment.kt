@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.findvenues.data.VenuesViewModel
 import com.example.findvenues.databinding.FragmentMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -14,18 +14,17 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import java.text.FieldPosition
 
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+class MapFragment() : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentMapBinding
-    private val viewModel by viewModels<VenuesViewModel>()
+    private val viewModel by activityViewModels<VenuesViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMapBinding.inflate(inflater, container, false)
-        viewModel.getData()
+
         val mapFragment =
             childFragmentManager.findFragmentById(binding.googleMap.id) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -34,54 +33,37 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-//        val listFragment = ListFragment()
-//        if (listFragment.isClicked) {
-//            singleItemRender(googleMap)
-//        } else {
-            allItemRender(googleMap)
-//        }
-    }  private fun allItemRender(googleMap: GoogleMap) {       //rendering all markers on the map
-        viewModel.venuesLiveData.observe(viewLifecycleOwner, { venuesList ->
-            for (i in venuesList.indices step 1) {
-                val lat = venuesList[i].geocodes.main.latitude
-                val long = venuesList[i].geocodes.main.longitude
-
-                googleMap.addMarker(
-                    MarkerOptions().position(LatLng(lat.toDouble(), long.toDouble()))
-                        .title(venuesList[i].name)
-
-                )
-                googleMap.moveCamera(
-                    CameraUpdateFactory.newLatLngZoom(
-                        LatLng(lat.toDouble(), long.toDouble()),
-                        10f
-                    )
-                )
-            }
-        })
+        allItemRender(googleMap)
     }
 
-//    private fun singleItemRender(googleMap: GoogleMap) {
-//        val listFragment = ListFragment()
-////        var position = listFragment.getPosition()
-//
-//        viewModel.venuesLiveData.observe(viewLifecycleOwner, { venuesList ->
-//            val lat = venuesList[position].geocodes.main.latitude
-//            val long = venuesList[position].geocodes.main.longitude
-//            googleMap.addMarker(
-//                MarkerOptions().position(LatLng(lat.toDouble(), long.toDouble()))
-//                    .title(venuesList[position].name)
-//
-//            )
-//            googleMap.moveCamera(
-//                CameraUpdateFactory.newLatLngZoom(
-//                    LatLng(lat.toDouble(), long.toDouble()),
-//                    10f
-//                )
-//            )
-//        })
-//    }
+    private fun allItemRender(googleMap: GoogleMap) {       //rendering all markers on the map
 
+        viewModel.venuesLiveData.observe(viewLifecycleOwner, { venuesList ->
+            venuesList.forEach { venue ->
+                val lat = venue.geocodes.main.latitude
+                val long = venue.geocodes.main.longitude
+                if (venue.fsq_id == viewModel.clickedVenue?.fsq_id) {
+                    googleMap.addMarker(
+                        MarkerOptions().position(LatLng(lat.toDouble(), long.toDouble()))
+                            .title(venue.name)
+                    )
+                    googleMap.moveCamera(
+                        CameraUpdateFactory.newLatLngZoom(
+                            LatLng(lat.toDouble(), long.toDouble()),
+                            15f
+                        )
+                    )
 
+                } else {
+                    googleMap.addMarker(
+                        MarkerOptions().position(LatLng(lat.toDouble(), long.toDouble()))
+                            .title(venue.name)
+                    )
+                }
+
+            }
+
+        })
+    }
 }
 
