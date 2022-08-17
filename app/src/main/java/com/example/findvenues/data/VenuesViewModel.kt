@@ -1,6 +1,7 @@
 package com.example.findvenues.data
 
 import android.app.Application
+import android.text.Editable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -15,6 +16,7 @@ import retrofit2.Response
 
 class VenuesViewModel(application: Application) : AndroidViewModel(application) {
     val venuesLiveData: MutableLiveData<List<Result>> = MutableLiveData()
+    var clickedVenue: Result? = null
 //    val filters = MutableLiveData<Set<Filter>>()
     val map: HashMap<String, Any> = HashMap()
     private val repository: VenueRepository
@@ -30,13 +32,13 @@ class VenuesViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    fun getData(open_at: String = "") {
+    fun getData(open_at: String="") {
         val retrofitBuilder = RetrofitBuilder()
 
         map["ll"] = "33.8938,35.5018"
         map["radius"] = 15000
         map["open_at"] = open_at
-        map["limit"] = 20
+        map["limit"] = 10
 
         val retrofitData = retrofitBuilder.getInterface()
             .getDataQuery(map)

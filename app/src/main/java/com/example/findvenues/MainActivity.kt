@@ -3,7 +3,6 @@ package com.example.findvenues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.findvenues.databinding.ActivityMainBinding
-import com.google.android.gms.maps.OnMapReadyCallback
 
 
 class MainActivity : AppCompatActivity() {
