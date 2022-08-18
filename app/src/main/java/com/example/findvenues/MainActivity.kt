@@ -3,6 +3,10 @@ package com.example.findvenues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.findvenues.databinding.ActivityMainBinding
+import android.content.Intent
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +31,11 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.flFragment, mapFragment).commit()
             }
+
+        }
+        binding.secondActivityBtn.setOnClickListener{
+            val i = Intent(applicationContext, SecondActivity::class.java)
+            startActivity(i)
 
         }
 

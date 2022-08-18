@@ -12,4 +12,6 @@
     <string name="example_1t2130">example: 1T2130</string>
     <string name="open_at">Open at:</string>
     <string name="search">Search</string>
+    <string name="saved_list">Saved list</string>
+    <string name="back_to_venues">Back To Venues</string>
 </resources>

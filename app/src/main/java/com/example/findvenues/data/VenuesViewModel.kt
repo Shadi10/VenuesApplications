@@ -17,8 +17,8 @@ import retrofit2.Response
 class VenuesViewModel(application: Application) : AndroidViewModel(application) {
     val venuesLiveData: MutableLiveData<List<Result>> = MutableLiveData()
     var clickedVenue: Result? = null
-//    val filters = MutableLiveData<Set<Filter>>()
-    val map: HashMap<String, Any> = HashMap()
+
+    private val map: HashMap<String, Any> = HashMap()
     private val repository: VenueRepository
 
     init {
