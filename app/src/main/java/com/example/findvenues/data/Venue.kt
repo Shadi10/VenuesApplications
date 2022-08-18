@@ -11,3 +11,6 @@ data class Venue (
     val country: String,
     val address : String
         )
+data class venueData(
+    val venues: List<Venue>
+)
