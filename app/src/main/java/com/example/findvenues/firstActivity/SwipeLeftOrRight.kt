@@ -1,4 +1,4 @@
-package com.example.findvenues
+package com.example.findvenues.firstActivity
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

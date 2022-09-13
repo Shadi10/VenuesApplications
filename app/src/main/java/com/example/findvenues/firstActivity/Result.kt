@@ -1,4 +1,4 @@
-package com.example.findvenues
+package com.example.findvenues.firstActivity
 
 
 data class Result(
