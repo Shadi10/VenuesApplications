@@ -1,5 +1,6 @@
-package com.example.findvenues
+package com.example.findvenues.firstActivity
 
+import com.example.findvenues.firstActivity.VenueResponse
 import retrofit2.Call
 import retrofit2.http.*
 

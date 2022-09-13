@@ -1,17 +1,51 @@
 <resources>
-    <string name="app_name">FindVenues</string>
+    <string name="app_name">Venues List</string>
     <string name="name">Name</string>
     <string name="location">location</string>
     <string name="address">address</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="venue_map">Venue Map</string>
-    <string name="venue_list">Venue List</string>
+    <string name="venue_list">Venues List</string>
     <string name="map_fragment">Map Fragment</string>
-    <string name="title_activity_maps">MapsActivity</string>
-    <string name="example_1t2130">example: 1T2130</string>
-    <string name="open_at">Open at:</string>
-    <string name="search">Search</string>
+    <string name="example_1t2130">ex: 1T2130</string>
     <string name="saved_list">Saved list</string>
     <string name="back_to_venues">Back To Venues</string>
+    <string name="venues_list">Venues List</string>
+    <string name="venues_map">Venues Map</string>
+    <string name="menu">Menu</string>
+    <string name="search">Search</string>
+    <string name="back">Back</string>
+    <string name="saved_venues">Saved Venues</string>
+    <string name="export_to_csv_file">Export To CSV File</string>
+    <string name="account_login">Account Login</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="sign_up_here">Sign up here</string>
+    <string name="not_registered">Not registered?</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="email">Email</string>
+    <string name="new_password">New Password</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="venue_options">Venue Options</string>
+    <string name="venue_open_at">Venue Open At:</string>
+    <string name="radius">Radius :</string>
+    <string name="nb_of_venues">Nb Of Venues :</string>
+    <string name="ex_10000">ex: 10000</string>
+    <string name="ex_15">ex: 15</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="list_option">List Option</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="log_out">Log Out</string>
+    <string name="remember_me">Remember me</string>
+    <string name="login_suggestion">Login Suggestion:</string>
+    <string name="use">Use</string>
+
+
 </resources>

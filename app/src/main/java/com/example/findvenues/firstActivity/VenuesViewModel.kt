@@ -1,13 +1,14 @@
-package com.example.findvenues.data
+package com.example.findvenues.firstActivity
 
 import android.app.Application
-import android.text.Editable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.findvenues.Result
-import com.example.findvenues.RetrofitBuilder
-import com.example.findvenues.VenueResponse
+import com.example.findvenues.data.user.User
+import com.example.findvenues.data.user.UserRepository
+import com.example.findvenues.data.venue.Venue
+import com.example.findvenues.data.venue.VenueDatabase
+import com.google.android.gms.maps.model.Marker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -15,15 +16,17 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class VenuesViewModel(application: Application) : AndroidViewModel(application) {
+
     val venuesLiveData: MutableLiveData<List<Result>> = MutableLiveData()
     var clickedVenue: Result? = null
-
+    var marker: Marker? = null
     private val map: HashMap<String, Any> = HashMap()
-    private val repository: VenueRepository
+    private val repository: UserRepository
+    private var userList: List<User> = listOf()
 
     init {
-        val venueDao = VenueDatabase.getDatabase(application).venueDao()
-        repository = VenueRepository(venueDao)
+        val userDao = VenueDatabase.getDatabase(application).userDao()
+        repository = UserRepository(userDao)
     }
 
     fun addVenue(venue: Venue) {
@@ -32,14 +35,25 @@ class VenuesViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    fun getData(open_at: String="") {
+    fun getLl(): String {
+        val lat = marker?.position?.latitude
+        val long = marker?.position?.longitude
+        return "$lat,$long"
+    }
+
+
+    fun getData(
+        ll: String = "33.8547,35.8623",
+        radius: String = "10000",
+        limit: String = "5",
+        openAt: String = ""
+    ) {
         val retrofitBuilder = RetrofitBuilder()
 
-        map["ll"] = "33.8938,35.5018"
-        map["radius"] = 15000
-        map["open_at"] = open_at
-        map["limit"] = 10
-
+        map["ll"] = ll
+        map["radius"] = radius
+        map["limit"] = limit
+        map["open_at"] = openAt
         val retrofitData = retrofitBuilder.getInterface()
             .getDataQuery(map)
 

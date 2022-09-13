@@ -1,10 +1,11 @@
-package com.example.findvenues
+package com.example.findvenues.firstActivity
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.findvenues.R
 
-class MyAdapter(private val venuesList: List<Result>,private val recyclerViewInterface: RecyclerViewInterface) :
+class MyAdapter(private val venuesList: List<Result>, private val recyclerViewInterface: RecyclerViewInterface) :
     RecyclerView.Adapter<VenuesViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): VenuesViewHolder {

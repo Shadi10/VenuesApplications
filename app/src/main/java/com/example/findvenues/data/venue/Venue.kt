@@ -1,4 +1,4 @@
-package com.example.findvenues.data
+package com.example.findvenues.data.venue
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,8 +9,6 @@ data class Venue (
     val id: Int,
     val name: String,
     val country: String,
-    val address : String
+    val address : String,
+    val userId : Int
         )
-data class venueData(
-    val venues: List<Venue>
-)
